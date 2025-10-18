@@ -24,5 +24,5 @@
 ## **Installation & Setup** ⚡
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/dil-e-derivative.git
+git clone https://github.com/saniya-raj/dil-e-derivative.git
 cd dil-e-derivative
