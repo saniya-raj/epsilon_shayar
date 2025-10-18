@@ -136,6 +136,38 @@ label {
   color: #5b2c2c;
   margin-bottom: 8px;
 }
+.poem-view {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.poem-view h2 {
+    margin-top: 0;
+}
+
+.poem-view .author {
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.poem-view .poem-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 16px;
+}
+
+.poem-view .back {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007BFF;
+}
 
 input[type="text"],
 textarea,
