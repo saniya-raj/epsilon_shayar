@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dil ki Derivative 💖</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+                        url('/static/images/intro-bg.webp') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #ffb6c1;
+            text-shadow: 0 0 20px rgba(255, 182, 193, 0.7);
+            animation: fadeInDown 2s ease-in-out;
+        }
+
+        .typing {
+            font-size: 1.4rem;
+            color: #ffe4e1;
+            margin-top: 30px;
+            width: 80%;
+            text-align: center;
+            min-height: 80px;
+            white-space: pre-wrap;
+            font-style: italic;
+        }
+
+        .btn-enter {
+            margin-top: 40px;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            background: linear-gradient(45deg, #ff758f, #ffb6c1);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .btn-enter:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            color: rgba(255, 182, 193, 0.7);
+            font-size: 20px;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-700px) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <h1>✨ Dil-e-Derivative ✨</h1>
+
+    <div class="typing" id="typing"></div>
+
+    <a href="{{ url_for('home') }}">
+        <button class="btn-enter">✨ Enter the World of Words ✨</button>
+    </a>
+
+    <script>
+        // Typing Effect
+        const shayariLines = [
+            "“Har lafz ek hisaab hai, har jazba ek equation…”",
+            "“Tu jo likhe whi shayari ban jaati hai”",
+            "“Dil se likhi har baat dil tak phuch jaati hai”",
+            "“Shayari kuch aur nahi bas lafzo ka haseen sa chehra hai”",
+            "“Jise dekhne k liye aaine par bhi lgaa sunehra sa ek pehra hai”",
+            "“Alfaaz solve nahi karte, par likhne se integrate zarur ho jaate hai.”",
+            "“Aur shayari... ek derivative hai uss khamoshi ki, jo kabhi kahi nahi jaa sakti.”"
+        ];
+
+        let lineIndex = 0;
+        let charIndex = 0;
+        const typingElement = document.getElementById("typing");
+
+        function typeLine() {
+            if (lineIndex < shayariLines.length) {
+                if (charIndex < shayariLines[lineIndex].length) {
+                    typingElement.textContent += shayariLines[lineIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeLine, 50);
+                } else {
+                    charIndex = 0;
+                    lineIndex++;
+                    setTimeout(() => {
+                        typingElement.textContent = "";
+                        typeLine();
+                    }, 2500);
+                }
+            } else {
+                lineIndex = 0;
+                typeLine();
+            }
+        }
+
+        typeLine();
+
+        // Floating Hearts
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = 5 + Math.random() * 3 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
+

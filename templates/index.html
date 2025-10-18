@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Mehfil-e-khaas</h2>
+
+<div class="poem-list">
+  {% for poem in poems %}
+  <div class="poem-card">
+    <h3>{{ poem.title }}</h3>
+    <p class="author">By {{ poem.author }}</p>
+    <a href="{{ url_for('view_poem', index=loop.index0) }}">Open the verse</a>
+    <!-- Like/Dislike section -->
+    <div class="like-dislike">
+        <button class="like-btn" onclick="likeVerse(this)">🤍</button>
+        <span class="like-count">0</span>
+        <button class="dislike-btn" onclick="dislikeVerse(this)">👎</button>
+    </div>
+  </div>
+  {% else %}
+  <p>No poems yet. Be the first to add one!</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Add Your lines</h2>
+
+<form method="POST" class="poem-form">
+
+  <div class="form-group">
+    <label for="type">Type:</label>
+    <select name="title" id="type" required>
+      <option value="">Select Type</option>
+      <option>Romantic</option>
+      <option>Sad</option>
+      <option>Inspirational</option>
+      <option>Patriotic</option>
+      <option>Friendship</option>
+      <option>Humorous</option>
+      <option>Spiritual</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="author">Author (optional):</label>
+    <input type="text" name="author" id="author" placeholder="Your name">
+    <div class="checkbox-container">
+      <input type="checkbox" id="show_name" name="show_name" checked>
+      <label for="show_name">Display my name with the poem</label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="content">Your Poem / Ghazal:</label>
+    <textarea name="content" id="content" rows="8" placeholder="Write your lines here..." required></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+{% endblock %}
+
