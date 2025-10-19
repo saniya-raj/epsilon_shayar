@@ -1,26 +1,37 @@
-import json
-import os
+import sqlite3
 
-# Ensure poems.json is always accessed correctly (same folder as db.py)
-DATA_FILE = os.path.join(os.path.dirname(__file__), 'poems.json')
+DB_FILE = "poems.db"
 
+# ---------- Database Setup ----------
+def init_db():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS poems (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    author TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    content TEXT NOT NULL
+                )''')
+    conn.commit()
+    conn.close()
+
+# ---------- Load all poems ----------
 def load_poems():
-    """Load all poems from poems.json"""
-    if not os.path.exists(DATA_FILE):
-        with open(DATA_FILE, 'w', encoding='utf-8') as f:
-            json.dump([], f, indent=4)
-            return []
-    with open(DATA_FILE, 'r', encoding='utf-8') as f:
-        try:
-            return json.load(f)
-        except json.JSONDecodeError:
-            return []  # Return empty if file corrupted or empty
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("SELECT author, title, content FROM poems ORDER BY id DESC")
+    poems = [{"author": row[0], "title": row[1], "content": row[2]} for row in c.fetchall()]
+    conn.close()
+    return poems
 
-def save_poem(new_poem):
-    """Append a new poem and save to poems.json"""
-    poems = load_poems()
-    poems.append(new_poem)
-    with open(DATA_FILE, 'w', encoding='utf-8') as f:
-        json.dump(poems, f, indent=4, ensure_ascii=False)
-    print(f"✅ Poem saved successfully: {new_poem['title']}")
+# ---------- Save a new poem ----------
+def save_poem(poem):
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("INSERT INTO poems (author, title, content) VALUES (?, ?, ?)",
+              (poem["author"], poem["title"], poem["content"]))
+    conn.commit()
+    conn.close()
 
+# Initialize database when imported
+init_db()
